@@ -18,11 +18,13 @@ class EmployersAddForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        if (this.state.name.length > 2 && this.state.salary.length > 0) {
         this.props.onAdd(this.state)
         this.setState({
             name: "",
             salary: ""
         })
+    }
     }
 
     render () {
