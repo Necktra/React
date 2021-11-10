@@ -33,6 +33,18 @@ class App extends Component {
         })
     }
 
+    onChangeSalary = (id, newSalary) => {
+        newSalary = newSalary.replace(/[^0-9]/g,"");
+        this.setState(({data})=>({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return { ...item, salary: newSalary }
+                }
+                return item;
+            })
+        }))
+    }
+
     addItem = (newEmployerData) => {
         const newItem = {
             name: newEmployerData.name,
@@ -100,7 +112,7 @@ class App extends Component {
                     <AppFilter filter={filter} onFilterSelect={this.onFilterSelect}/>
                 </div>
                 <EmployersList data={visibleData} onDelete={this.deleteItem}
-                    onToggleProp={this.onToggleProp}/>
+                    onToggleProp={this.onToggleProp} onChangeSalary={this.onChangeSalary}/>
                 <EmployersAddForm onAdd={this.addItem} />
             </div>
         );
